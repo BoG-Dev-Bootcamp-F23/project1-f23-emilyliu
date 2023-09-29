@@ -1,4 +1,4 @@
-let pokemonID = 2
+let pokemonID = 132
 
 function addTypeTab(type) {
     const map = {
@@ -21,21 +21,67 @@ function addTypeTab(type) {
         "steel": "#B7B7CE",
         "fairy": "#D685AD"
     }
-    console.log(type)
     const typeContainer = document.getElementById("type-container")
     const typeDiv = document.createElement("div")
+    typeDiv.classList.add("type-div")
     typeDiv.textContent = type
     typeDiv.style.backgroundColor = map[type]
     typeContainer.appendChild(typeDiv)
 }
 
+function addInfoData(infoData) {
+    const informationContainer = document.getElementById("information-container")
+    const pInfoData = document.createElement("p")
+    pInfoData.innerHTML = "height: " + (infoData["height"]/10.0).toString() + "m" 
+     + "<br /> weight: " + (infoData["weight"]/10.0).toString() + "kg"
+     + "<br /> hp: " + infoData["hp"]
+     + "<br /> nattack: " + infoData["attack"]
+     + "<br /> defense: " + infoData["defense"]
+     + "<br /> special-attack: " + infoData["special-attack"]
+     + "<br /> special-defense: " + infoData["special-defense"]
+     + "<br /> speed: " + infoData["speed"]
+    informationContainer.appendChild(pInfoData)
+}
+
+function addMovesData(movesData) {
+    const informationContainer = document.getElementById("information-container")
+    const pMoveData = document.createElement("p")
+    movesData.forEach(move =>  pMoveData.innerHTML += move.move.name + "<br />")
+    informationContainer.appendChild(pMoveData)
+}
+
 function displayData(data) {
+    const infoDisplay = true
     const pokemonName = document.getElementById("pokemon-name")
     pokemonName.textContent = data.name
     const types = data.types
     const img = document.getElementById("poke-img")
     img.src = data.sprites.front_default
     types.forEach(type => addTypeTab(type.type.name))
+    console.log(data)
+    // height, weight, hp, attack, defense, special-attack, special-defense, speed
+    const infoData = {
+        "height": data.height,
+        "weight": data.weight,
+        "hp": data.stats[0].base_stat,
+        "attack": data.stats[1].base_stat,
+        "defense": data.stats[2].base_stat,
+        "special-attack": data.stats[3].base_stat,
+        "special-defense": data.stats[4].base_stat,
+        "speed": data.stats[5].base_stat
+    }
+    const moves = [...data.moves]
+
+    const rightHeader = document.getElementById("right-header")
+    if (infoDisplay) {
+        rightHeader.textContent = "Info"
+        addInfoData(infoData)
+    } else {
+        rightHeader.textContent = "Moves"
+        addMovesData(moves)
+    }
+
+
 }
 
 async function getPokemon() {
