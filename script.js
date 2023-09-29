@@ -1,7 +1,7 @@
-let pokemonID = 2
+let pokemonID = 2 // 1-1017
 let infoDisplay = true
 
-function addTypeTab(type) {
+function addTypeTab(type, typeContainer) {
     const map = {
         "normal": "#A8A77A",
         "fire": "#EE8130",
@@ -22,7 +22,6 @@ function addTypeTab(type) {
         "steel": "#B7B7CE",
         "fairy": "#D685AD"
     }
-    const typeContainer = document.getElementById("type-container")
     const typeDiv = document.createElement("span")
     typeDiv.classList.add("type-span")
     typeDiv.textContent = type
@@ -69,7 +68,8 @@ function displayData(data) {
     const types = data.types
     const img = document.getElementById("poke-img")
     img.src = data.sprites.front_default
-    types.forEach(type => addTypeTab(type.type.name))
+    const typeContainer = document.getElementById("type-container")
+    types.forEach(type => addTypeTab(type.type.name, typeContainer))
 
     // height, weight, hp, attack, defense, special-attack, special-defense, speed
     const infoData = {
@@ -109,6 +109,23 @@ async function getPokemon() {
     }
 }
 
+const leftArrow = document.getElementById("left-arrow")
+const rightArrow = document.getElementById("right-arrow")
+
+leftArrow.addEventListener("click", (e) => {
+    pokemonID -= 1
+    const typeContainer = document.getElementById("type-container")
+    let children = document.getElementsByClassName("type-span")
+    Array.from(children).forEach(child => typeContainer.removeChild(child))
+    getPokemon()
+})
+rightArrow.addEventListener("click", (e) => {
+    pokemonID += 1
+    const typeContainer = document.getElementById("type-container")
+    let children = document.getElementsByClassName("type-span")
+    Array.from(children).forEach(child => typeContainer.removeChild(child))
+    getPokemon()
+})
 
 
 getPokemon()
