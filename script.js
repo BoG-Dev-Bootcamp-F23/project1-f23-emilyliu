@@ -1,4 +1,4 @@
-let pokemonID = 2 // 1-1017
+let pokemonID = 132 // 1-1017
 let infoDisplay = true
 
 function addTypeTab(type, typeContainer) {
@@ -114,6 +114,9 @@ const rightArrow = document.getElementById("right-arrow")
 
 leftArrow.addEventListener("click", (e) => {
     pokemonID -= 1
+    if (pokemonID <= 0) {
+        pokemonID = 1017
+    }
     const typeContainer = document.getElementById("type-container")
     let children = document.getElementsByClassName("type-span")
     Array.from(children).forEach(child => typeContainer.removeChild(child))
@@ -121,6 +124,9 @@ leftArrow.addEventListener("click", (e) => {
 })
 rightArrow.addEventListener("click", (e) => {
     pokemonID += 1
+    if (pokemonID > 1017) {
+        pokemonID = 1
+    }
     const typeContainer = document.getElementById("type-container")
     let children = document.getElementsByClassName("type-span")
     Array.from(children).forEach(child => typeContainer.removeChild(child))
