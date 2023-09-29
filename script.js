@@ -1,4 +1,5 @@
 let pokemonID = 2
+let infoDisplay = true
 
 function addTypeTab(type) {
     const map = {
@@ -31,34 +32,45 @@ function addTypeTab(type) {
 
 function addInfoData(infoData) {
     const informationContainer = document.getElementById("information-container")
-    const pInfoData = document.createElement("p")
-    pInfoData.innerHTML = "height: " + (infoData["height"]/10.0).toString() + "m" 
+    informationContainer.innerHTML = "height: " + (infoData["height"]/10.0).toString() + "m" 
      + "<br /> weight: " + (infoData["weight"]/10.0).toString() + "kg"
      + "<br /> hp: " + infoData["hp"]
-     + "<br /> nattack: " + infoData["attack"]
+     + "<br /> attack: " + infoData["attack"]
      + "<br /> defense: " + infoData["defense"]
      + "<br /> special-attack: " + infoData["special-attack"]
      + "<br /> special-defense: " + infoData["special-defense"]
      + "<br /> speed: " + infoData["speed"]
-    informationContainer.appendChild(pInfoData)
 }
 
 function addMovesData(movesData) {
     const informationContainer = document.getElementById("information-container")
-    const pMoveData = document.createElement("p")
-    movesData.forEach(move =>  pMoveData.innerHTML += move.move.name + "<br />")
-    informationContainer.appendChild(pMoveData)
+    informationContainer.innerHTML = ''
+    movesData.forEach(move =>  informationContainer.innerHTML += move.move.name + "<br />")
+}
+
+function handleInfoMoveLogic(selector, infoData, moves, infoButton, movesButton) {
+    const rightHeader = document.getElementById("right-header")
+    if (selector === true) {
+        rightHeader.textContent = "Info"
+        addInfoData(infoData)
+        movesButton.style.backgroundColor = "#e8e8e8"
+        infoButton.style.backgroundColor = "#7cff79"
+    } else {
+        rightHeader.textContent = "Moves"
+        addMovesData(moves)
+        infoButton.style.backgroundColor = "#e8e8e8"
+        movesButton.style.backgroundColor = "#7cff79"
+    }
 }
 
 function displayData(data) {
-    const infoDisplay = true
     const pokemonName = document.getElementById("pokemon-name")
     pokemonName.textContent = data.name
     const types = data.types
     const img = document.getElementById("poke-img")
     img.src = data.sprites.front_default
     types.forEach(type => addTypeTab(type.type.name))
-    console.log(data)
+
     // height, weight, hp, attack, defense, special-attack, special-defense, speed
     const infoData = {
         "height": data.height,
@@ -72,20 +84,19 @@ function displayData(data) {
     }
     const moves = [...data.moves]
 
-    const rightHeader = document.getElementById("right-header")
-    if (infoDisplay) {
-        rightHeader.textContent = "Info"
-        addInfoData(infoData)
-        const infoSelectorDiv = document.getElementById("info-button")
-        infoSelectorDiv.style.backgroundColor = "#7cff79"
-    } else {
-        rightHeader.textContent = "Moves"
-        addMovesData(moves)
-        const infoSelectorDiv = document.getElementById("move-button")
-        infoSelectorDiv.style.backgroundColor = "#7cff79"
-    }
+    const infoButton = document.getElementById("info-button")
+    const movesButton = document.getElementById("moves-button")
 
+    infoButton.addEventListener("click", (e) => {
+        infoDisplay = true
+        handleInfoMoveLogic(infoDisplay, infoData, moves, infoButton, movesButton)
+    })
+    movesButton.addEventListener("click", (e) => {
+        infoDisplay = false
+        handleInfoMoveLogic(infoDisplay, infoData, moves, infoButton, movesButton)
+    })
 
+    handleInfoMoveLogic(infoDisplay, infoData, moves, infoButton, movesButton)
 }
 
 async function getPokemon() {
