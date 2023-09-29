@@ -1,4 +1,4 @@
-let pokemonID = 1
+let pokemonID = 2
 
 function addTypeTab(type) {
     const map = {
@@ -76,9 +76,13 @@ function displayData(data) {
     if (infoDisplay) {
         rightHeader.textContent = "Info"
         addInfoData(infoData)
+        const infoSelectorDiv = document.getElementById("info-button")
+        infoSelectorDiv.style.backgroundColor = "#7cff79"
     } else {
         rightHeader.textContent = "Moves"
         addMovesData(moves)
+        const infoSelectorDiv = document.getElementById("move-button")
+        infoSelectorDiv.style.backgroundColor = "#7cff79"
     }
 
 

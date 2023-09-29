@@ -2,15 +2,21 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+.main-header {
+    text-align: center;
+}
+
 .body-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.left-container {
+.left-container, .right-container {
     width: 20%;
 }
+
+
 
 .img-container {
     border: solid 2px black;
@@ -63,14 +69,33 @@ body {
 }
 
 .button-container {
+    display: flex;
     background-color: #e8e8e8;
-    padding-left: 40px;
-    padding-right: 40px;
+    width: 100px;
+    height: 35px;
     padding-top: 2px;
     padding-bottom: 2px;
     border-radius: 5px;
+    justify-content: center;
+    align-items: center;
 }
 
 .arrow-png {
     width: 30px;
+}
+
+#right-header {
+    font-size: 20px;
+    text-align: center;
+}
+
+#information-container {
+    background-color:#e8e8e8;
+    padding: 15px;
+    height: 300px;
+    overflow-x: hidden;
+}
+
+p {
+    margin: 0;
 }
