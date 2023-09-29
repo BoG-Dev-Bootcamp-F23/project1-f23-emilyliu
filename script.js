@@ -1,4 +1,4 @@
-let pokemonID = 132
+let pokemonID = 1
 
 function addTypeTab(type) {
     const map = {
@@ -22,8 +22,8 @@ function addTypeTab(type) {
         "fairy": "#D685AD"
     }
     const typeContainer = document.getElementById("type-container")
-    const typeDiv = document.createElement("div")
-    typeDiv.classList.add("type-div")
+    const typeDiv = document.createElement("span")
+    typeDiv.classList.add("type-span")
     typeDiv.textContent = type
     typeDiv.style.backgroundColor = map[type]
     typeContainer.appendChild(typeDiv)

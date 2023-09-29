@@ -3,6 +3,9 @@
     <head>
         <title>Project 1</title>
         <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alata&family=Lato:wght@400;700&family=Sora:wght@400;800&display=swap" rel="stylesheet">
     </head>
     <body>
         <h1>Bits of Good Mid-Semester Project</h1>
@@ -11,19 +14,20 @@
                 <div class = "img-container">
                     <img id = "poke-img">
                 </div>
-                <div>
+                <div class = "pokemon-name-container">
                     <p id = "pokemon-name"></p>
                 </div>
+                <h1 class = "type-header">Types: </h1>
                 <div id = "type-container">
-
+                    
                 </div>
                 <div class = "pokemon-selector-buttons">
-                    <button class = "left-button">
-                        Left
-                    </button>
-                    <button class = "right-button">
-                        Right
-                    </button>
+                    <div class = "button-container" id = "left-arrow">
+                        <img src = "./images/left_arrow.png" class = "arrow-png">
+                    </div>
+                    <div class = "button-container" id = "right-arrow">
+                        <img src = "./images/right_arrow.png" class = "arrow-png">
+                    </div>
                 </div>
             </div>
             <div class = "right-container">
